@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div th:insert="fragments/header :: modelheader"></div>
+    <div class="container">
+        <div class="container">
+            <strong>Cliente: </strong><label><p th:text="${venda.clientePF.nome}"></p></label>
+            <br>
+            <strong>CPF/CNPJ: </strong><label><p th:text="${venda.clientePF.cpf}"></p></label>
+            <br>
+            <strong>ID Cliente: </strong><label><p th:text="${venda.clientePF.id}"></p></label>
+        </div>
+        <br>
+        <h2>Carrinho</h2>
+        <div class="container">            
+            <strong>Data da Compra: </strong><label><p th:text="${venda.data}"></p></label>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <th scope="col">Id_Produto</th>
+            <th scope="col">Descricao</th>
+            <th scope="col">Qantidade</th>
+            <th scope="col">Valor</th>
+            </thead>
+                <tr th:each="it,posicao : ${venda.itemVenda}">
+                    <td th:text="${posicao.index + 1}"></td>
+                    <td th:text="${it.produto.descricao}"></td>
+                    <td th:text="${it.quantidade}"></td>
+                    <td th:text="${#numbers.formatCurrency(it.total())}"></td>
+                    <td hidden th:text="${#numbers.formatCurrency(it.total())}"></td>
+                </tr>
+        </table>
+        <h4>Total da Compra: <p th:text="${#numbers.formatCurrency(venda.total())}"></p></h4>
+    </div>
+
+<div th:insert="fragments/footer :: modelfooter"></div>

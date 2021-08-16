@@ -1,0 +1,8 @@
+{
+    "elements": {},
+    "attributes": {
+        "sec:authentication": {
+            "context": "span"
+        }
+    }
+}

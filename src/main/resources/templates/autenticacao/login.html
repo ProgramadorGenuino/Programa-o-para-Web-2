@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+        <link href="/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css" rel="stylesheet"/>    
+        <style>
+            .titulo{
+                text-align: center;
+                margin: 3rem;
+            }
+            body{
+                font-family: 'Poppins', sans-serif;
+                background: #FFEFBA;  /* fallback for old browsers */
+                background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <h1 class="titulo">Bem Vindo a Loja!</h1>
+        <div class="row" style="margin: 20px">
+            <div class="mx-auto">
+
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">Usuário/senha inválidos!</div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-info">Usuário Desconectado com Sucesso!</div>
+                </div>
+
+                <div class="card">
+                    <h5 class="card-header">Informe usuário e senha</h5>
+                    <div class="card-body">
+                        <form th:action="@{/login}" method="post">
+                            <div class="form-group">
+                                <label>Login:<input class="form-control" type="text"
+                                                    name="username" placeholder="Usuário"/></label>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Senha:<input class="form-control"
+                                                    type="password" name="password" placeholder="Senha"/></label>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <p>Se for novo por aqui, Então <a th:href="@{/cadastrar/novo}">Cadastre-se</a> agora!</p>
+            </div>
+        </div>
+
+
+
+    </body>
+
+
+</html>

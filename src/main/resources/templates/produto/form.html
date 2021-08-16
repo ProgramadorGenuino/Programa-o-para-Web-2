@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div th:insert="fragments/header :: modelheader"></div>
+
+<!--<div>Aqui é o formulário de Produtos!</div>
+<form th:action="${produto.id == null} ? @{/produto/save} : @{/produto/update}" th:object="${produto}" method="POST">
+    <input type="hidden" th:field="*{id}">
+    <input type="text" th:field="*{descricao}">
+    <input type="text" th:field="*{valor}">
+    <input type="submit" value="Cadastrar">
+</form>-->
+<div class="container">
+    <div class="alert alert-danger" th:errors="${produto.*}" style="margin: 10px;"></div>
+    <form th:action="${produto.id == null} ? @{/produto/save} : @{/produto/update}" th:object="${produto}" method="POST">
+    <!--<div class="alert alert-danger" th:each="erro : ${#fields.detailedErrors()}">
+        <span th:text="${erro.fieldName}+' '+${erro.message}"></span>
+    </div>-->
+        <div class="form-row">
+            <input type="hidden" th:field="*{id}">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Nome do Produto" th:field="*{descricao}">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="valor" th:field="*{valor}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary" style="margin: 5px;">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div th:insert="fragments/footer :: modelfooter"></div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div th:insert="fragments/header :: modelheader"></div>
+<div class="container">
+    <form th:action="@{/clientepf/buscarcliente}" sec:authorize="hasRole('ADMIN')" method="POST">
+        <div class="container">
+            <input type="text" th:name="nomeCliente" placeholder="Buscar por Nome">
+            <button type="submit" class="btn btn-primary" style="margin: 5px">Buscar</button>
+        </div>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+            </tr>
+        </thead>
+        <tr th:each="c : ${listaCliente}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.nome}"></td>
+            <td th:text="${c.cpf}"></td>
+            <td><a th:href="@{/clientepf/edit/{id}(id=${c.id})}"><button class="btn btn-light">Editar</button></a></td>
+            <td><a onclick="return window.confirm('Tem certeza que deseja deletar este registro?')" sec:authorize="hasRole('ADMIN')" th:href="@{/clientepf/remove/{id}(id=${c.id})}"><button class="btn btn-danger">Excluir</button></a></td>
+            <td><a th:href="@{/venda/comprascliente/{id}(id=${c.id})}">Compras</a></td>
+        </tr>
+    </table>
+</div>
+<div th:insert="fragments/footer :: modelfooter"></div>

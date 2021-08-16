@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div th:insert="fragments/header :: modelheader"></div>
+<div class="container">
+    <form th:action="@{/venda/buscadordata}" method="POST">
+        <div class="container">
+                <input type="date" th:name="dataBusca">
+                <button type="submit" class="btn btn-primary" style="margin: 5px">Buscar</button>
+        </div>
+    </form>
+    <div th:class="${!#strings.isEmpty(erroDataVazia)}?'alert alert-danger d-block'" style="margin: 10px;">
+        <p th:text="${!#strings.isEmpty(erroDataVazia)}?${erroDataVazia}"></p>
+    </div>
+    <br>
+    <h2>Vendas:</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id Venda</th>
+                <th scope="col">Data</th>
+                <th scope="col">Total</th>
+                <th scope="col">Id Cliente</th>
+            </tr>
+        </thead>
+        <tr th:each="lv : ${listaVenda}">
+            <td th:text="${lv.id}"></td>
+            <td th:text="${lv.data}"></td>
+            <td th:text="${#numbers.formatCurrency(lv.total())}"></td>
+            <td th:text="${lv.clientePF.nome}"></td>
+            <td><a th:href="@{/venda/consultar/{id}(id=${lv.id})}">Detalhes</a></td>
+        </tr>
+    </table>
+</div>
+<div th:insert="fragments/footer :: modelfooter"></div>
+
